@@ -31,6 +31,8 @@ examine the history and state (see also: git help revisions)
               $git log --pretty=oneline
               $git log --graph
               
+              $git reflog  <====This will show the record of all your action
+              
    show       Show various types of objects
               $git show  <====commit id, author, date, tag, diff, index, etc
               $git show --tags --pretty=oneline
