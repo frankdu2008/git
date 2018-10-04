@@ -130,32 +130,6 @@ Git三个对象
 
 
 
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 练习
 
 安装git Mac OS
@@ -313,7 +287,7 @@ $git push origin HEAD --force
     1. 打上一个tag
         $git tag -a tag_name -m 'your_tag_info'
     2. 查看版本
-        $git tag
+        $git tag -l | --list
     3. 删除版本
         $git tag -d tag_name
     4. 查看远程tag <--------------????? Unknown option –r?
@@ -324,6 +298,13 @@ $git push origin HEAD --force
         $git push origin :refs/tags/[your_tag_name]  ==>是这样的
     7. 合并远程tag到本地
         $git pull origin --tags
+    8. checkout	
+        指定版本的code
+	$git checkout your_tag_name
+	===>Warning ===>Warning
+	===>此时，处于HEAD detached的状态，if you commit any changes and you want to push them to certain branch, you will have
+	===>switch to that branch first, then do $git cherry-pick you_commit_id  <===which is the one showed when you checkout
+	===>to the branch. After that, you can do $git push.
     号外==> $git archive
 
 
