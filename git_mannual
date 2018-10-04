@@ -321,7 +321,7 @@ $git push origin HEAD --force
     5. 推送本地tag到远程(现在本地创建, 后推送)
         $git push origin --tags  
     6. 删除远程版本
-        $git push origin :refs/tags/[your_tag_name]  ==>???继续迷糊
+        $git push origin :refs/tags/[your_tag_name]  ==>是这样的
     7. 合并远程tag到本地
         $git pull origin --tags
     号外==> $git archive
@@ -376,6 +376,8 @@ $git push origin HEAD --force
                 $git config --{local,global,system} parameter value
         $git config --global user.name your_name   //-->如果有空格，请放入引号内
         $git config --global user.email your_email
+	<======== One of the most import parameter ----> longpaths <------========>
+	$git config [--global] core.longpaths true
 
     3. 查看当前配置
         格式
@@ -387,6 +389,81 @@ $git push origin HEAD --force
         $git commit -m 'Removed folder'
     2. 删掉github上的
         $git push origin your_branch_name
+
+
+玩玩 detached HEAD
+	frank@ ~/git/testgit $  git checkout 2.0.0
+	Note: checking out '2.0.0'.
+
+	You are in 'detached HEAD' state. You can look around, make experimental
+	changes and commit them, and you can discard any commits you make in this
+	state without impacting any branches by performing another checkout.
+
+	If you want to create a new branch to retain commits you create, you may
+	do so (now or later) by using -b with the checkout command again. Example:
+
+	  git checkout -b <new-branch-name>
+
+	HEAD is now at 6106fc3... v2
+	frank@ ~/git/testgit $ git status
+	HEAD detached at 2.0.0
+	nothing to commit, working directory clean
+	frank@ ~/git/3/testgit $ git status
+	HEAD detached at 2.0.0
+	nothing to commit, working directory clean
+	frank@ ~/git/3/testgit $ echo 'dddd'>ddd
+	frank@ ~/git/3/testgit $ git status
+	HEAD detached at 2.0.0
+	Untracked files:
+	  (use "git add <file>..." to include in what will be committed)
+
+		ddd
+
+	nothing added to commit but untracked files present (use "git add" to track)
+	frank@ ~/git/3/testgit $ git add ddd
+	frank@ ~/git/3/testgit $ git commit -m 'ddd'
+	[detached HEAD 012c3d4] ddd
+	 1 file changed, 1 insertion(+)
+	 create mode 100644 ddd
+	frank@ ~/git/3/testgit $ git status
+	HEAD detached from 2.0.0
+	nothing to commit, working directory clean
+	frank@ ~/git/3/testgit $ git checkout dev
+	Warning: you are leaving 1 commit behind, not connected to
+	any of your branches:
+
+	  012c3d4 ddd
+
+	If you want to keep it by creating a new branch, this may be a good time
+	to do so with:
+
+	 git branch <new-branch-name> 012c3d4
+
+	Switched to branch 'dev'
+	Your branch is up-to-date with 'origin/dev'.
+	frank@ ~/git/3/testgit $ git cherry-pick 012c3d4
+	[dev e8f55de] ddd
+	 Date: Wed Oct 3 22:25:17 2018 -0400
+	 1 file changed, 1 insertion(+)
+	 create mode 100644 ddd
+	frank@ ~/git/3/testgit $ ls
+	10		b		de		t		v2.0.1
+	README.md	d1		dev.txt		t2
+	a		dd		hello		text
+	after1.0.0	ddd		ssniu		v2.0
+	frank@ ~/git/3/testgit $ git push origin dev
+	Counting objects: 3, done.
+	Delta compression using up to 2 threads.
+	Compressing objects: 100% (2/2), done.
+	Writing objects: 100% (3/3), 266 bytes | 0 bytes/s, done.
+	Total 3 (delta 1), reused 0 (delta 0)
+	remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+	To git@github.com:Toulouse2008/testgit.git
+	   0c38df7..e8f55de  dev -> dev
+
+
+
+
 
 
 git ignores certain type of files
