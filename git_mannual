@@ -164,6 +164,9 @@ Git三个对象
         6-->7-->9
     11. 删除加入本地但不想push的文件
         $git rm --cached your_file_name
+    12. 如果只是本地删除了一个或者多个文件，要想把这些改变推送到repo，可以执行如下操作
+    	$git commit -m 'del'
+	$git push
 
 撤销操作 $git reset --hard |-- soft commit_id  默认选项为soft
     1. 放弃工作目录下的所有修改
@@ -370,6 +373,14 @@ $git push origin HEAD --force
         $git commit -m 'Removed folder'
     2. 删掉github上的
         $git push origin your_branch_name
+删掉已经在repo的folder
+    1. 删掉本地git内的
+        $git rm -rf --cached ./path/to/your_folder
+	$git add .
+        $git commit -m 'Removed folder'
+    2. 删掉github上的
+        $git push origin your_branch_name
+    	
 
 
 玩玩 detached HEAD
@@ -441,7 +452,10 @@ $git push origin HEAD --force
 	remote: Resolving deltas: 100% (1/1), completed with 1 local object.
 	To git@github.com:Toulouse2008/testgit.git
 	   0c38df7..e8f55de  dev -> dev
-
+   如果在HEAD detached状态下，修改了文件，而且文件没有commit到HEAD中，切换到其他分支，修改会丢失的，此时，git会给出相应提示，并放弃切换操作。
+   如果要放弃修改，可以强行切换????????
+   如果想放弃已经add或者commit到detached HEAD中的内容，可以用 
+   $git rm --cached file_names
 
 
 
