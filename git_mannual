@@ -310,6 +310,31 @@ $git push origin HEAD --force
 	===>to the branch. After that, you can do $git push.
     号外==> $git archive
 
+Hotfix on a specific version
+    1. Checkout code under that version
+    	$git checkout your_version
+    2. 新建一个hotfix分支
+    	$git branch hotfixv#
+    3. 把新建的分支推送到远程
+    	$git push origin hotfixv#
+	  或者
+	$git push --set-upstream origin hotfixv#
+    4. 切换到hotfix分支
+    	$git checkoutout hotfix#
+    5. 修复bug
+    6. 把修改内容加入git
+    	$git add .
+	$git commit -m 'fix #'
+	$git push
+    7. 发布修改，即给一个小版本号，部署测试
+    8. 通过后，把修改合并到主分支
+    	$git checkout master
+	$git merge hotfix#
+	$git push   <=====本地merge同步到远程
+    9. 删除hotfix分支
+    	$git branch -d hotfix#
+	$git push origin :hotfix#
+	
 
 合作项目
         - 在github账号，设置共享
