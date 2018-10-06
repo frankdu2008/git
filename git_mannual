@@ -334,7 +334,19 @@ Hotfix on a specific version
     9. 删除hotfix分支
     	$git branch -d hotfix#
 	$git push origin :hotfix#
-	
+
+如何把指定文件退回到指定版本
+    1. 找到要退回目的地的Hash值
+        $git log --pretty=oneline
+    2. 在git中将文件回滚
+        $git reset HASH_VALUE(e.g., d3e39d3e39) file_name
+	$git commit -m 'revert d to vd2'
+    3. 把回滚后的文件更新到工作目录 working directory
+    	$git checkout file_name
+    4. 查看文件内容，确定合乎要求
+    	$cat file_name | less file_name
+    5. 同步更新到远程
+    	$git push
 
 合作项目
         - 在github账号，设置共享
