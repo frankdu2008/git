@@ -509,7 +509,7 @@ Hotfix on a specific version
 
 文件名称太长
     1. 查看当前配置
-    	$git config --list --global
+    	$git config --list | -l --global
     2. 设置core.longpaths true
     	$git config --global core.longpaths true
 
